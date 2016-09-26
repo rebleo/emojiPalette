@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="./style/emoji.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="./libs/emoji.min.js">
+    </script>
+  </head>
+  <body>
+
+    <div id="out5"> </div>
+
+    <script type="text/javascript">
+
+    //initialize the emojiconvertor
+    var emoji = new EmojiConvertor();
+
+    document.getElementById('out5').innerHTML = emoji.replace_colons("hello :smile: world");
+    </script >
+
+  </body>
+</html>
