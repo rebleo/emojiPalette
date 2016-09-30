@@ -1,0 +1,36 @@
+<!-- Aaron's hello world with js-emoji libarary
+https://github.com/iamcal/js-emoji -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="./style/emoji.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="./libs/emoji.min.js">
+    </script>
+  </head>
+  <body>
+
+    <div id="helloworld"> </div>
+		<div id="tree"> </div>
+		<canvas id="theCanvas" width="200" height="100"></canvas>
+
+    <script type="text/javascript">
+
+		function load(data) {
+			var emojiPalate = JSON.parse(emojiPalateLite.json);
+			console.log(emojiPalate);
+		}
+    //initialize the emojiconvertor
+    var emoji = new EmojiConvertor();
+
+
+    document.getElementById('helloworld').innerHTML = emoji.replace_colons("hello :smile: world");
+
+
+    </script >
+
+  </body>
+</html>

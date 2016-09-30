@@ -1,0 +1,51 @@
+<!-- reb's test with https://github.com/iamcal/js-emoji  -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="./style/emoji.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="./libs/emoji.min.js">
+    </script>
+  </head>
+  <body>
+
+    <div id="helloworld"> </div>
+		<div id="tree"> </div>
+		<canvas id="theCanvas" width="500" height="500"></canvas>
+		<img width="100" height="200" id="emoji">
+
+    <script type="text/javascript">
+
+		var data;
+
+
+		// function load(data) {
+		// 	var emojiPalate = JSON.parse(emojiPalateLite.json);
+		// 	console.log(emojiPalate);
+		// }
+
+    //initialize the emojiconvertor
+    var emoji = new EmojiConvertor();
+		var tree = document.getElementById('tree').innerHTML = emoji.replace_colons(":evergreen_tree:");
+
+
+		var c = document.getElementById("theCanvas");
+		var ctx = c.getContext("2d");
+
+
+		ctx.font = "60px Arial";
+
+		for (var i = 0; i < 10; i++){
+			for (var j=0; j<25; j++){
+				ctx.fillText(tree,10*(i*4),100*j)
+			}
+		};
+
+
+    </script >
+
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!-- reb's preliminary script to quick & dirty emojiPalette idea -->
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>( emojiPalate Proof of Concept 1 )</title>
+
+		  <script type="text/javascript" src="./libraries/p5.min.js">  </script>
+			<script type="text/javascript" src="./libraries/p5.dom.min.js">  </script>
+
+  </head>
+
+  <body>
+			<p>
+
+				<button id="rbutton"> red </button>
+				<button id="gbutton"> green </button>
+				<button id="bbutton"> blue </button><br /><br />
+				<button id="clearButton"> clear </button>
+			</p>
+
+	</body>
+
+    <script type="text/javascript">
+
+		var cntx;
+		var r;
+		var g;
+		var b;
+
+		var rButton;
+		var gButton;
+		var bButton;
+
+		var redEmoji;
+
+		var textBox;
+		var emojis= [];
+
+
+		function gotEmoji(data) {
+
+			red = data.red;
+			green = data.green;
+			blue = data.blue;
+
+		}
+
+		function setup() {
+		  contx = createCanvas(800,800);
+			background(255);
+			loadJSON('emojiPalate.json', gotEmoji);
+
+			//html element button ...
+
+		  var rbutton = select('#rbutton');
+			var gbutton = select('#gbutton');
+			var bbutton = select('#bbutton');
+			var clearButton = select('#clearButton');
+
+			rbutton.mousePressed(function() {
+					redemoji = text(random(red), random(50,width-50), random(50,height-50));
+					append(emojis, redemoji);
+
+
+			});
+
+
+			gbutton.mousePressed(function() {
+				textBox = text(random(green), random(50,width-50), random(50,width-50));
+
+			});
+
+			bbutton.mousePressed(function() {
+				textBox = text(random(blue), random(50,width-50), random(50,width-50));
+
+			});
+
+		clearButton.mousePressed(function() {
+				clear(textBox);
+				console.log("works")
+
+			});
+
+	}
+
+	function draw(){
+
+		textSize(64);
+	}
+
+
+
+
+    </script >
+
+  </body>
+</html>

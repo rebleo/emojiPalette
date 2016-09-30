@@ -1,0 +1,91 @@
+<!-- reb coding w/ help by Eve & Sawn -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>( emojiGo )</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="300" height="227" style="float:left"></canvas>
+    <div id="color" style="width:200px;height:50px;float:left"></div>
+
+    <script type="text/javascript">
+        var data, x, y, pixel;
+				var allData = [];
+        var pixelArray = [];
+
+
+				//make picture, duh
+        var img = new Image();
+        img.src = './assests/emoji2.png';
+				//make canvas, duh
+        var canvas = document.getElementById('canvas');
+				//
+        var ctx = canvas.getContext('2d');
+
+				//load page & display image
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0,50,50);
+						///????what's with this line?
+            img.style.display = 'none';
+
+						getPixels()
+						// console.log(pixelArray)
+        };
+
+				//so make rectangel one pixel, duh
+				//count one unit x -size of "rectangle"
+				//count one unit y
+				//== pixels!
+				//the below isn't working. basically there is a lot of empty pixels, or black pixels. i'm trying to only keep the data that has a value above one.
+        function getPixels() {
+            console.log(img.width, img.height);
+						//get the data from the origin to the end of the image
+            pixel = ctx.getImageData(0, 0, img.width, img.height);
+            data = pixel.data;
+						allData.push(data);
+            // console.log(pixel.data);
+
+						for (var i = 0; i < allData.length; i++){
+							if (allData[i] > "0") {
+								pixelArray.push(allData[i])
+							}
+						}
+            console.log(pixelArray);
+				  // pixelArray.push(data);
+
+        }
+
+        function pick(event) {
+            x = event.layerX;
+            y = event.layerY;
+
+            pixel = ctx.getImageData(1, 1, 1, 1);
+            // console.log(pixel)
+            data = pixel.data;
+            console.log(data)
+                // console.log(data)
+            var rgba = 'rgba(' + data[0] + ',' + data[1] +
+                ',' + data[2] + ',' + (data[3] / 255) + ')';
+            color.style.background = rgba;
+            color.textContent = rgba;
+        }
+        // canvas.addEventListener('mousemove', pick);
+    </script>
+</body>
+
+</html>
