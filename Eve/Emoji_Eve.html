@@ -1,0 +1,280 @@
+<!-- reb coding w/ with Eve & Sawn -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>( emojiGo )</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            vertical-align: top;
+            /*background-color: red;*/
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="300" height="227" style="float:left"></canvas>
+    <div id="color" style="width:200px;height:50px;float:left"></div>
+    <div id="color2" style="width:200px;height:50px;float:left"></div>
+      <div id="color3" style="width:200px;height:50px;float:left"></div>
+
+    <script type="text/javascript">
+        var data, x, y, pixel;
+        var pixelArray = []
+
+        //make picture, raw javascript
+        var img = new Image();
+        img.src = 'em3.png';
+        //make canvas, duh
+        var canvas = document.getElementById('canvas');
+
+        //be explicit about wether it's a 2D or 3D canvas
+        var ctx = canvas.getContext('2d');
+
+        //load page & display image
+        img.onload = function() {
+            //draw the image to the canvas
+            ctx.drawImage(img, 0, 0);
+            ///hide the image (don't diaply it, although this line is not working)
+            img.style.display = 'none';
+            // var allpixels = ctx.getImageData(0,0,img.width,img.height)
+            var colors = []
+
+            //Get the pixel data for the image
+            var allpixels = ctx.getImageData(0, 0, img.width, img.height).data
+                // console.log(allpixels.length)
+
+            //iterathrrough array and concat the array
+            for (var v = 0; v < allpixels.length - 4; v += 4) {
+                var clumpedColors = [allpixels[v], allpixels[v + 1], allpixels[v + 2], allpixels[v + 3]]
+                if (allpixels[v + 3] == 255) {
+
+
+                    colors.push(clumpedColors)
+                } else {
+                    console.log('transparent pixel detected')
+                }
+
+            }
+            
+            console.log(colors)
+
+
+
+
+            var hashed = [];
+
+            colors.forEach(function(arr) {
+                var id = hash(arr);
+                var contains = hashed.find(v => v.id == id);
+                if (contains) {
+                    contains.count++;
+                } else {
+                    hashed.push({
+                        id: id,
+                        color: arr,
+                        count: 1
+                    });
+                }
+            });
+
+            hashed.sort(function(a, b) {
+                return b.count - a.count;
+            })
+
+            console.log(hashed)
+
+            var prominentColor = hashed[0].color;
+            var secondaryColor = hashed[1].color;
+            var thirdColor = hashed[2].color;
+            var colorbox = document.getElementById('color');
+            colorbox.style.background = 'rgba(' + prominentColor + ')';
+            colorbox.textContent = 'rgba(' + prominentColor + ')';
+            var colorbox2 = document.getElementById('color2');
+            colorbox2.style.background = 'rgba(' + secondaryColor + ')';
+            colorbox2.textContent = 'rgba(' + secondaryColor + ')';
+            var colorbox3 = document.getElementById('color3');
+            colorbox3.style.background = 'rgba(' + thirdColor + ')';
+            colorbox3.textContent = 'rgba(' + thirdColor + ')';
+            // hash(hashed)
+
+
+            function hash(arr) {
+                var hash = "";
+                arr.forEach(function(v) {
+                    hash += ((v < 99) ? ((v < 9) ? "00" : "0") : "") + v;
+                });
+                // console.log(hash)
+                return hash;
+            }
+
+
+            //   var b = count(colors);
+            //   console.log(b)
+            // var c =  countcombinations(colors)
+            //   console.log(c)
+
+
+            // console.log(colors)
+            //  var reducedPalette =   reduceColorsToUniques(colors)
+            //  console.log(reducedPalette.length)
+            //  subtotal(colors,reducedPalette)
+            //  console.log( subtotal(colors,reducedPalette))
+            // toObject(colors)
+            // colors.reduce(function(el){
+            //   if (el[0])
+            // })
+            // createListofValues(colors)
+
+
+
+
+
+        };
+
+        // function count(stack, history) {
+        //   var counter = 0;
+        //   //no history, starts at empty
+        //   history = history || [];
+        //   console.log(stack[0])
+        //   stack[0].forEach(function(it) {
+        //     if (! history.length || history[history.length -1] < it) {
+        //       if (stack[1]) {
+        //         counter += count(stack.slice(1), history.concat([it]));
+        //       } else  {
+        //         counter++;
+        //       }
+        //     }
+        //   });
+        //   console.log(counter)
+        //   return counter;
+        // }
+
+
+
+        ////////////
+
+        // function clusterSimilar(arr){
+        //     var history = []
+        //     for (var i in arr){
+        //
+        //       if (arr[i][0] == arr[i+1][0])
+        //
+        //       }
+        //
+        // }
+
+        ////////////////////////
+
+
+        function countcombinations(arr) {
+            var history = new Array();
+
+            for (var i = 0; i < arr[0].length; i++) {
+                for (var j = 0; j < arr[1].length; j++) {
+                    for (var k = 0; k < arr[2].length; k++) {
+                        if (arr[0][i] == arr[1][j] || arr[0][i] == arr[2][k] || arr[1][j] == arr[2][k]) {} else {
+                            // If all are different, consider this set as candidate
+                            var found = false;
+
+                            history.forEach(function(entry) {
+                                if (
+                                    // The various possible sequences for comparison
+                                    (arr[0][i] == entry[0] && arr[1][j] == entry[1] && arr[2][k] == entry[2]) ||
+                                    (arr[0][i] == entry[0] && arr[1][j] == entry[2] && arr[2][k] == entry[1]) ||
+                                    (arr[0][i] == entry[1] && arr[1][j] == entry[0] && arr[2][k] == entry[2]) ||
+                                    (arr[0][i] == entry[1] && arr[1][j] == entry[2] && arr[2][k] == entry[0]) ||
+                                    (arr[0][i] == entry[2] && arr[1][j] == entry[0] && arr[2][k] == entry[1]) ||
+                                    (arr[0][i] == entry[2] && arr[1][j] == entry[1] && arr[2][k] == entry[0])
+                                ) found = true;
+                            });
+
+                            // If not found, add to history
+                            if (!found) history[history.length] = new Array(arr[0][i], arr[1][j], arr[2][k]);
+                        }
+                    }
+                }
+            }
+            return history
+        }
+        ////////////
+
+        function subtotal(mainArray, reducedArray) {
+            var empty = {}
+            return mainArray.map(function(el) {
+                    if (el === reducedArray) {
+                        return empty[el] = 1;
+                    } else {
+                        return empty[el] = 0;
+                    }
+                })
+                .reduce(function(a, value) {
+                    return a + value;
+                });
+        }
+
+
+
+        function toObject(arr) {
+            var rv = {};
+            for (var i = 0; i < arr.length; ++i)
+                rv[i] = arr[i];
+            // console.log('the array is now this ', rv)
+            return rv;
+        }
+
+
+
+        //not calling this anymore
+        function ConcatPixelArray(imgData, index) {
+            var i = index * 4,
+                d = imgData.data;
+            return [d[i], d[i + 1], d[i + 2], d[i + 3]] // returns array [R,G,B,A]
+                // console.log('new array: '+[d[i],d[i+1],d[i+2],d[i+3]])
+        }
+
+        function reduceColorsToUniques(passedArray) {
+            var empty = {}
+            return passedArray.filter(function(item) {
+                return empty.hasOwnProperty(item) ? false : (empty[item] = true);
+            }).map(function(item) {
+                // console.log(item)
+                return item
+            })
+        }
+
+        function createListofValues(pass) {
+            count = function(array) {
+                    var o = {};
+                    array.forEach(function(a) {
+                        o[a] = (o[a] || 0) + 1;
+                    });
+                    console.log('this ', o)
+                    keysSorted = Object.keys(o).sort(function(a, b) {
+                        return o[a] - o[b]
+                    })
+                    console.log(keysSorted);
+
+                    var colorbox = document.getElementById('color');
+                    colorbox.style.background = 'rgba(' + keysSorted[0] + ')';
+                    colorbox.textContent = 'rgba(' + keysSorted[0] + ')';
+
+                    // console.log(keysSorted.length);
+                    return o
+                }
+                (pass);
+
+
+        }
+        // canvas.addEventListener('mousemove', pick);
+    </script>
+</body>
+
+</html>
