@@ -68,10 +68,11 @@
                       //retrieve context
                       var ctx = canv.getContext('2d');
                       var img = new Image();
+
                        //add images to the body
                         img.src = "" + folder + val;
+                        img.height = 64;
                         img.width = 64;
-                        img.height = 32;
                         // console.log(img.src)
 
                         //what we want to do is add images into each canvas
@@ -84,6 +85,8 @@
                             //this line just adds images to the body
 
                         //$("body").append("<img src='" + folder + val + "'>");
+
+                        allProcessing(img, ctx);
 
                     }
 
@@ -104,12 +107,12 @@
         //var canvas = document.getElementById('canvas');
         //be explicit about wether it's a 2D or 3D canvas
         //var ctx = canvas.getContext('2d');
-        // allProcessing(img)
 
 
 
 
-        function allProcessing(img) {
+
+        function allProcessing(img, ctx) {
             //load page & display image
             img.onload = function() {
                 //draw the image to the canvas
