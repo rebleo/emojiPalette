@@ -13,14 +13,10 @@
         }
 
         canvas {
-<<<<<<< HEAD
             /*width: 64px;
             height: 64px;*/
             /*display: block;
             position: relative;*/
-=======
-            position: relative;
->>>>>>> a79e2fb1d2986a36a47b28fd0de54e15a70c17fd
             /*background-color: red;*/
         }
 
@@ -57,13 +53,13 @@
 
         ///STEP 1 - load all images
 
+
         $.ajax({
             url: folder,
             success: function(data) {
 
                 $(data).find("a").attr("href", function(i, val) {
                     if (val.match(/\.(jpe?g|png|gif)$/)) {
-<<<<<<< HEAD
                         //create a canvas
                         var canv = document.createElement('canvas');
                         canv.id = 'canvas' + index;
@@ -77,22 +73,6 @@
                         img.src = "" + folder + val;
                         // img.width = 64;
                         // img.height = 64;
-=======
-                      //create a canvas
-                      var canv = document.createElement('canvas');
-                      canv.id = 'canvas' + index;
-                      index++;
-                      document.body.appendChild(canv); // adds the canvas to the body element
-
-                      //retrieve context
-                      var ctx = canv.getContext('2d');
-                      var img = new Image();
-
-                       //add images to the body
-                        img.src = "" + folder + val;
-                        img.height = 64;
-                        img.width = 64;
->>>>>>> a79e2fb1d2986a36a47b28fd0de54e15a70c17fd
                         // console.log(img.src)
 
                         //what we want to do is add images into each canvas
@@ -106,8 +86,6 @@
 
                         //$("body").append("<img src='" + folder + val + "'>");
 
-                        allProcessing(img, ctx);
-
                     }
 
                 })
@@ -116,6 +94,7 @@
 
         });
         ////step 1 done
+
 
         //step 2, go through all images and look at their pixels
 
@@ -126,17 +105,14 @@
         //var canvas = document.getElementById('canvas');
         //be explicit about wether it's a 2D or 3D canvas
         //var ctx = canvas.getContext('2d');
+        // allProcessing(img)
 
-<<<<<<< HEAD
 
 
 
         function allProcessing(img, ctx) {
             colors = [];
             hashed = [];
-=======
-        function allProcessing(img, ctx) {
->>>>>>> a79e2fb1d2986a36a47b28fd0de54e15a70c17fd
             //load page & display image
             img.onload = function() {
                 //draw the image to the canvas
@@ -144,6 +120,7 @@
                 ///hide the image (don't diaply it, although this line is not working)
                 // img.style.display = 'none';
                 // var allpixels = ctx.getImageData(0,0,img.width,img.height)
+
 
                 //Get the pixel data for the image
                 var allpixels = ctx.getImageData(0, 0, img.width, img.height).data
@@ -154,6 +131,7 @@
                     var clumpedColors = [allpixels[v], allpixels[v + 1], allpixels[v + 2], allpixels[v + 3]]
                     if (allpixels[v + 3] == 255) {
 
+
                         colors.push(clumpedColors)
                     } else {
                         // console.log('transparent pixel detected')
@@ -162,6 +140,9 @@
                 }
                 console.log('img length is:  ' + colors.length)
                     // console.log(colors)
+
+
+
 
                 //STEP 3 - reduce array to remove repeted colors and weight them
 
@@ -223,11 +204,8 @@
 
 
 
-<<<<<<< HEAD
                 $('body').append('<div style="position:realtive;width:100%;height:100px;opacity:1;z-index:100;background:#000;"></div>')
 
-=======
->>>>>>> a79e2fb1d2986a36a47b28fd0de54e15a70c17fd
                 //STEP 5: display the colors for us
                 for (j in hashed) {
                     // console.log('create box')
@@ -254,6 +232,8 @@
                 // colorbox3.style.background = 'rgba(' + thirdColor + ')';
                 // colorbox3.textContent = 'rgba(' + thirdColor + ')';
 
+
+
                 function hash(arr) {
                     var hash = "";
                     arr.forEach(function(v) {
@@ -264,9 +244,22 @@
                 }
 
 
+
+
+
+
+
+
+
             };
 
         }
+
+
+
+
+
+
 
         // function countcombinations(arr) {
         //     var history = new Array();
@@ -300,6 +293,9 @@
         // }
         ////////////
 
+
+
+
         //not using this anymore, but was potentially helpful
         // function toObject(arr) {
         //     var rv = {};
@@ -308,6 +304,11 @@
         //     // console.log('the array is now this ', rv)
         //     return rv;
         // }
+
+
+
+
+
 
 
         // canvas.addEventListener('mousemove', pick);
