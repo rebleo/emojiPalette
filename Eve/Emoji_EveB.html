@@ -13,23 +13,25 @@
         }
 
         canvas {
-            vertical-align: top;
-            float: right;
-            /*background-color: red;*/
-        }
-
-        .boxes {
+            width: 64px;
+            height: 64px;
             display: block;
             position: relative;
-            width: 100px;
-            height: 100px;
+            /*background-color: red;*/
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: relative;
+            /*background-color: red;*/
         }
     </style>
 </head>
 
 <body>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <canvas id="canvas" width="300" height="227" style="float:right"></canvas>
+    <!-- <canvas id="canvas" width="300" height="227" style="float:right"></canvas> -->
     <!-- <div id="color" style="width:200px;height:50px;float:left"></div>
     <div id="color2" style="width:200px;height:50px;float:left"></div>
     <div id="color3" style="width:200px;height:50px;float:left"></div> -->
@@ -40,11 +42,13 @@
         var allImages = []
         var dir = "images";
         var fileextension = ".png";
-        var index = 0
+        var index = 0;
         var colors = []
         var hashed = [];
         var folder = "images/";
 
+        //for color similarity
+        var sensitivity = 5;
 
         ///STEP 1 - load all images
 
@@ -52,31 +56,41 @@
         $.ajax({
             url: folder,
             success: function(data) {
-                //         //create a canvas
-                //         var canv = document.createElement('canvas');
-                //         canv.id = 'canvas' + index;
-                //         index++
-                //
-                //         document.body.appendChild(canv); // adds the canvas to the body element
-                //         // document.getElementById('canvas'+index).appendChild(canv); // adds the canvas to #someBox
-                //         var newCanvas = document.body.appendChild(canvas)
-                //         var ctx = newCanvas.getContext('2d');
-                //         var img = new Image();
-                //
-                //
-                //         //add images to the body
-                //         $(data).find("a").attr("href", function(i, val) {
-                //             if (val.match(/\.(jpe?g|png|gif)$/)) {
-                //                 img.src = "'" + folder + val + "'"
-                //
-                //                 //what we want to do is add images into each canvas
-                //                 $('canvas' + index).append("<img src='" + folder + val + "'>");
-                allProcessing(img)
-                    //                     //this line just adds images to the body
-                    //                 $("body").append("<img src='" + folder + val + "'>");
-                    //             }
-                    //         });
+
+                $(data).find("a").attr("href", function(i, val) {
+                    if (val.match(/\.(jpe?g|png|gif)$/)) {
+                      //create a canvas
+                      var canv = document.createElement('canvas');
+                      canv.id = 'canvas' + index;
+                      index++;
+                      document.body.appendChild(canv); // adds the canvas to the body element
+
+                      //retrieve context
+                      var ctx = canv.getContext('2d');
+                      var img = new Image();
+                       //add images to the body
+                        img.src = "" + folder + val;
+                        img.width = 64;
+                        img.height = 32;
+                        // console.log(img.src)
+
+                        //what we want to do is add images into each canvas
+                        //document.getElementById(canv.id).appendChild("<img src=" + folder + val + ">");
+
+                        document.getElementById(canv.id).appendChild(img);
+                        //$("#theDiv").append("<img id='theImg' src='theImg.png'/>");
+                        console.log(folder+val);
+                        // allProcessing(folder+val)
+                            //this line just adds images to the body
+
+                        //$("body").append("<img src='" + folder + val + "'>");
+
+                    }
+
+                })
+
             }
+
         });
         ////step 1 done
 
@@ -84,18 +98,18 @@
         //step 2, go through all images and look at their pixels
 
         //make picture, raw javascript
-        var img = new Image();
-        img.src = 'em4.png';
+        //var img = new Image();
+        //img.src = 'em4.png';
         //make canvas
-        var canvas = document.getElementById('canvas');
+        //var canvas = document.getElementById('canvas');
         //be explicit about wether it's a 2D or 3D canvas
-        var ctx = canvas.getContext('2d');
+        //var ctx = canvas.getContext('2d');
         // allProcessing(img)
 
 
 
 
-        function allProcessing() {
+        function allProcessing(img) {
             //load page & display image
             img.onload = function() {
                 //draw the image to the canvas
@@ -158,7 +172,10 @@
                             // console.log('the same')
 
                             return;
-                        } else if (Math.abs(item.color[0] - item2.color[0]) + Math.abs(item.color[1] - item2.color[1]) + Math.abs(item.color[2] - item2.color[2]) < 10) {
+                        } else if ((Math.abs(item.color[0] - item2.color[0]) < sensitivity) &&
+                            (Math.abs(item.color[1] - item2.color[1]) < sensitivity) &&
+                            (Math.abs(item.color[2] - item2.color[2]) < sensitivity)
+                        ) {
                             // console.log(item.color)
                             // console.log(item2.color)
                             // console.log('added')
