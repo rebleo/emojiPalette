@@ -19,7 +19,7 @@ looking for biases and representing our findings visually.
 I see color wheels, rainbows, categories, people of/and their colors, this PROOF OF CONCEPT stage is wide for awesome projects/scripts - anything we can think of.
 
 ## further steps:
-Draw to canvas? Do we want to figure out how to do this ourselves or build on https://github.com/iamcal/js-emoji ?
+Draw to canvas? Do we want to figure out how to do this ourselves or build on  ?
 FUNCTION time, this is a time where we create the "tools" the palette, the thing we want to then, SHARE
 xo // 💚
 
@@ -32,8 +32,9 @@ xo // 💚
 
 ## resources
 
-[ascii art](https://en.wikipedia.org/wiki/ASCII_art)
-[unicode](http://www.unicode.org)
-[meaining of emoji](http://a16z.com/2016/08/02/emoji/)
-[emoji](https://en.wikipedia.org/wiki/Emoji)
-[p5.js libraries](http://p5js.org/libraries/)
+* [ascii art](https://en.wikipedia.org/wiki/ASCII_art)
+* [unicode](http://www.unicode.org)
+* [meaining of emoji](http://a16z.com/2016/08/02/emoji/)
+* [emoji](https://en.wikipedia.org/wiki/Emoji)
+* [p5.js libraries](http://p5js.org/libraries/)
+* [js-emoji](https://github.com/iamcal/js-emoji)
