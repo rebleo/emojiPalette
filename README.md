@@ -6,17 +6,14 @@ project by [aarón montoya-moraga](https://github.com/aamontoya89), [eve weinber
 
 ## to do
 
-* scrape scrape emoji data from [unicode](http://www.unicode.org/emoji/charts/full-emoji-list.html)
-* figure out how to strip and organize data
-* figure out how to access links embedded in data table
+* run all the emojis through  pixel-code and organize the data 
+* collaging tool  --> interactive emoji color wheel 
 * decide if save to local or create server
 * figure out how to build and api for general use
-* run all the emojis through  pixel-code and organize the data set accordingly.
 
-DATA VISUALIZE the whole thing in so many ways.
-shiffman had great insight about
-looking for biases and representing our findings visually.
-I see color wheels, rainbows, categories, people of/and their colors, this PROOF OF CONCEPT stage is wide for awesome projects/scripts - anything we can think of.
+
+MORE DATA VISUALIZE the rgb values, categories etc.
+*organize the surrounding data, names, keywords, etc. 
 
 ## further steps:
 Draw to canvas? Do we want to figure out how to do this ourselves or build on  ?
@@ -28,7 +25,6 @@ xo // 💚
 
 ![](img2.png)
 
-![](img3_data1.png)
 
 ## resources
 
